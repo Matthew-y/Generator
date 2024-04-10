@@ -1,6 +1,5 @@
 .DS_Store
 node_modules
-public
 /dist
 /src/components/parser/lib
 /src/components/render/lib
