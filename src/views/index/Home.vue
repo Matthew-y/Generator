@@ -145,17 +145,17 @@ import FormDrawer from './FormDrawer'
 import JsonDrawer from './JsonDrawer'
 import RightPanel from './RightPanel'
 import {
-  inputComponents, selectComponents, layoutComponents
+  inputComponents, selectComponents, layoutComponents, businessComponents
 } from '@/components/generator/config'
 import {
   beautifierConf, stringify, titleCase, deepClone, isObjectObject
-} from '@/utils/index'
+} from '@/utils'
 import {
   makeUpHtml, vueTemplate, vueScript, cssStyle
 } from '@/components/generator/html'
 import { makeUpJs } from '@/components/generator/js'
 import { makeUpCss } from '@/components/generator/css'
-import drawingDefalut from '@/components/generator/drawingDefalut'
+import drawingDefault from '@/components/generator/drawingDefault'
 import logo from '@/assets/logo.png'
 import CodeTypeModal from './CodeTypeModal'
 import DraggableItem from './DraggableItem'
@@ -189,12 +189,12 @@ export default {
       inputComponents,
       selectComponents,
       layoutComponents,
-      drawingList: drawingDefalut,
+      drawingList: drawingDefault,
       drawingData: {},
-      activeId: drawingDefalut[0].formId,
+      activeId: drawingDefault[0].formId,
       formData: {},
       generateConf: null,
-      activeData: drawingDefalut[0],
+      activeData: drawingDefault[0],
       leftComponents: [
         {
           title: 'base.input_components',
@@ -207,6 +207,10 @@ export default {
         {
           title: 'base.layout_components',
           list: layoutComponents
+        },
+        {
+          title: 'base.business_components',
+          list: businessComponents
         }
       ]
     }
@@ -246,7 +250,7 @@ export default {
     if (Array.isArray(this.drawingItems) && this.drawingItems.length > 0) {
       this.drawingList = this.drawingItems
     } else {
-      this.drawingList = drawingDefalut
+      this.drawingList = drawingDefault
     }
     this.activeFormItem(this.drawingList[0])
 
@@ -297,10 +301,7 @@ export default {
       const { dataType, method, url } = component.__config__
       if (dataType === 'dynamic' && method && url) {
         this.setLoading(component, true)
-        this.$axios({
-          method,
-          url
-        }).then(resp => {
+        this.$axios({ method, url }).then(resp => {
           this.setLoading(component, false)
           this.setRespData(component, resp.data)
         })
@@ -365,7 +366,7 @@ export default {
       config.formId = this.idGlobal
       config.renderKey = `${config.formId}${+new Date()}` // 改变renderKey后可以实现强制更新组件
       if (config.layout === 'colFormItem') {
-        item.__vModel__ = `field${this.idGlobal}`
+        !item.__vModel__ ? item.__vModel__ = `field${this.idGlobal}` : ''
       } else if (config.layout === 'rowFormItem') {
         config.componentName = `row${this.idGlobal}`
         !Array.isArray(config.children) && (config.children = [])

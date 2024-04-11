@@ -17,6 +17,7 @@ export default {
   'base.input_components': 'Input components',
   'base.optional_components': 'Optional components',
   'base.layout_components': 'Layout components',
+  'base.business_components': 'Business components',
   'base.run': 'Run',
   'base.view.json': 'View json',
   'base.export.file': 'Export file',

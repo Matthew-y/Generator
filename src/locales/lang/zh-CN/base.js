@@ -17,6 +17,7 @@ export default {
   'base.input_components': '输入型组件',
   'base.optional_components': '选择型组件',
   'base.layout_components': '布局型组件',
+  'base.business_components': '业务型组件',
   'base.run': '运行',
   'base.view.json': '查看json',
   'base.export.file': '导出文件',
