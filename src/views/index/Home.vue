@@ -49,6 +49,7 @@
         <a-button icon="eye" type="link" size="small" @click="showJson">
           {{ $t('base.view.json') }}
         </a-button>
+        <a-button icon="eye" type="link" size="small" @click="execSave">保存json</a-button>
         <a-divider type="vertical" />
         <a-button icon="cloud-download" type="link" size="small" @click="download">
           {{ $t('base.export.vue.file') }}
@@ -387,6 +388,11 @@ export default {
       const func = this[`exec${titleCase(this.operationType)}`]
       this.generateConf = data
       func && func(data)
+    },
+    execSave() {
+      this.AssembleFormData()
+      console.log(this.formData)
+      console.log(this.generateConf)
     },
     execRun(data) {
       this.AssembleFormData()

@@ -642,7 +642,8 @@ export const layoutComponents = [
     },
     type: 'default',
     justify: 'start',
-    align: 'top'
+    align: 'top',
+    style: { border: '2px solid red', backgroundColor: 'red' }
   },
   {
     __config__: {
@@ -676,7 +677,7 @@ export const businessComponents = [
       label: 'tag.input.label',
       showLabel: true,
       changeTag: true,
-      tag: 'a-input',
+      tag: 'a-table',
       tagIcon: 'inputIcon',
       defaultValue: undefined,
       required: true,
@@ -691,6 +692,16 @@ export const businessComponents = [
       addonBefore: '',
       addonAfter: ''
     },
+    dataSource: [
+      {
+        key: '1', name: 'matt', age: 21, address: 'china'
+      }
+    ],
+    columns: [
+      { title: '姓名', dataIndex: 'name', key: 'name' },
+      { title: '年龄', dataIndex: 'age', key: 'age' },
+      { title: '地址', dataIndex: 'address', key: 'address' }
+    ],
     // 其余的为可直接写在组件标签上的属性
     // 'default-value': 'aaaa',
     placeholder: 'base.enter',
